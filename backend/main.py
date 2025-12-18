@@ -266,10 +266,16 @@ async def summarize_pdf(file: UploadFile = File(...)):
         )
     except RuntimeError as e:
         logger.error(f"PDF processing runtime error: {str(e)}")
-        if "api" in str(e).lower() or "gemini" in str(e).lower():
+        error_str = str(e).lower()
+        if "api" in error_str or "gemini" in error_str:
             raise HTTPException(
                 status_code=503,
                 detail=f"AI service unavailable: {str(e)}"
+            )
+        elif "pymupdf" in error_str and "available" in error_str:
+            raise HTTPException(
+                status_code=503,
+                detail="PDF processing service temporarily unavailable due to missing dependencies"
             )
         else:
             raise HTTPException(

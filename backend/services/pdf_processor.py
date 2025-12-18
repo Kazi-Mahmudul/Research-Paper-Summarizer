@@ -3,7 +3,22 @@ PDF text extraction service using PyMuPDF with pdfplumber fallback.
 Handles text extraction, cleaning, and metadata extraction.
 """
 
-import fitz  # PyMuPDF
+import sys
+
+# Handle different PyMuPDF versions with graceful fallback
+try:
+    if sys.version_info >= (3, 11):
+        try:
+            import fitz_new as fitz  # Newer versions
+        except ImportError:
+            import fitz  # Fallback to standard fitz
+    else:
+        import fitz  # Standard fitz for older Python versions
+    PYMUPDF_AVAILABLE = True
+except ImportError:
+    fitz = None
+    PYMUPDF_AVAILABLE = False
+
 import pdfplumber
 import re
 import logging
@@ -48,23 +63,36 @@ class PDFProcessor:
         if len(pdf_content) > self.max_file_size:
             raise ValueError(f"PDF file too large: {len(pdf_content)} bytes")
         
-        # Try PyMuPDF first (faster and more reliable)
-        try:
-            logger.info(f"Attempting text extraction with PyMuPDF for {filename}")
-            return await self._extract_with_pymupdf(pdf_content, filename)
-        except Exception as e:
-            logger.warning(f"PyMuPDF extraction failed for {filename}: {str(e)}")
-            
-            # Fallback to pdfplumber
+        # Try PyMuPDF first if available (faster and more reliable)
+        if PYMUPDF_AVAILABLE:
             try:
-                logger.info(f"Attempting text extraction with pdfplumber for {filename}")
+                logger.info(f"Attempting text extraction with PyMuPDF for {filename}")
+                return await self._extract_with_pymupdf(pdf_content, filename)
+            except Exception as e:
+                logger.warning(f"PyMuPDF extraction failed for {filename}: {str(e)}")
+                
+                # Fallback to pdfplumber
+                try:
+                    logger.info(f"Attempting text extraction with pdfplumber for {filename}")
+                    return await self._extract_with_pdfplumber(pdf_content, filename)
+                except Exception as e2:
+                    logger.error(f"Both extraction methods failed for {filename}")
+                    raise RuntimeError(f"PDF text extraction failed: PyMuPDF error: {str(e)}, pdfplumber error: {str(e2)}")
+        else:
+            # If PyMuPDF is not available, use pdfplumber directly
+            try:
+                logger.info(f"Attempting text extraction with pdfplumber for {filename} (PyMuPDF not available)")
                 return await self._extract_with_pdfplumber(pdf_content, filename)
-            except Exception as e2:
-                logger.error(f"Both extraction methods failed for {filename}")
-                raise RuntimeError(f"PDF text extraction failed: PyMuPDF error: {str(e)}, pdfplumber error: {str(e2)}")
+            except Exception as e:
+                logger.error(f"PDF extraction failed for {filename} with pdfplumber")
+                raise RuntimeError(f"PDF text extraction failed: pdfplumber error: {str(e)}")
     
     async def _extract_with_pymupdf(self, pdf_content: bytes, filename: str) -> ExtractedText:
         """Extract text using PyMuPDF (fitz)."""
+        # Check if fitz is available
+        if not PYMUPDF_AVAILABLE or fitz is None:
+            raise RuntimeError("PyMuPDF is not available")
+            
         try:
             # Open PDF from bytes
             doc = fitz.open(stream=pdf_content, filetype="pdf")
@@ -234,6 +262,16 @@ class PDFProcessor:
         Returns:
             dict: Basic PDF information
         """
+        if not PYMUPDF_AVAILABLE:
+            # Fallback method when PyMuPDF is not available
+            return {
+                "page_count": 0,
+                "is_encrypted": False,
+                "metadata": {},
+                "file_size": len(content),
+                "warning": "Detailed PDF info requires PyMuPDF"
+            }
+        
         try:
             doc = fitz.open(stream=content, filetype="pdf")
             info = {
