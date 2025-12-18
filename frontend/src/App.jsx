@@ -167,11 +167,9 @@ function App() {
           <div className="text-center space-y-4">
             <p className="text-gray-600">
               Powered by 
-              <span className="font-semibold text-blue-600 mx-1">Google Gemini AI</span>
-              • Built with 
-              <span className="font-semibold text-cyan-600 mx-1">React</span>
-              & 
-              <span className="font-semibold text-green-600 mx-1">FastAPI</span>
+              <span className="font-semibold text-blue-600 mx-1">Research Summary AI</span>
+              • Specialized for 
+              <span className="font-semibold text-cyan-600 mx-1">Research Articles</span>
             </p>
             <div className="flex items-center justify-center space-x-6 text-sm text-gray-500">
               <a href="#" className="hover:text-gray-700 transition-colors">Documentation</a>
