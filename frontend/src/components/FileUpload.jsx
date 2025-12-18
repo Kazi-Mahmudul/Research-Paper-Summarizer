@@ -79,7 +79,7 @@ const FileUpload = ({ onFileUpload, loading, error }) => {
               ? 'scale-105 shadow-2xl border-blue-400 bg-blue-50' 
               : 'hover:scale-102 hover:shadow-xl border-gray-300 bg-white'
             }
-            border-2 border-dashed rounded-2xl p-12 md:p-16 text-center
+            border-2 border-dashed rounded-2xl p-6 sm:p-12 md:p-16 text-center
           `}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -93,33 +93,33 @@ const FileUpload = ({ onFileUpload, loading, error }) => {
           </div>
           
           {/* Upload Icon */}
-          <div className="relative z-10 space-y-6">
-            <div className="mx-auto w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-              <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="relative z-10 space-y-4 sm:space-y-6">
+            <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+              <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
             </div>
             
-            <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <div className="space-y-3 sm:space-y-4">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">
                 Upload Research Paper PDF
               </h3>
-              <p className="text-lg text-gray-600 max-w-md mx-auto">
+              <p className="text-base sm:text-lg text-gray-600 max-w-md mx-auto px-4">
                 Drag and drop your PDF file here, or click to browse your files
               </p>
             </div>
             
             {/* Requirements */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto pt-6">
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto pt-4 sm:pt-6">
+              <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-gray-500">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>PDF format only</span>
               </div>
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+              <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-gray-500">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span>Maximum 50MB</span>
               </div>
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-500">
+              <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-gray-500">
                 <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                 <span>Academic papers work best</span>
               </div>
@@ -135,25 +135,25 @@ const FileUpload = ({ onFileUpload, loading, error }) => {
           />
         </div>
       ) : (
-        <div className="card p-8 max-w-2xl mx-auto animate-slide-up">
+        <div className="card p-4 sm:p-8 max-w-2xl mx-auto animate-slide-up">
           {/* File Info */}
-          <div className="flex items-center space-x-6 mb-8 p-6 bg-gray-50 rounded-xl">
-            <div className="flex-shrink-0">
-              <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-6 sm:mb-8 p-4 sm:p-6 bg-gray-50 rounded-xl">
+            <div className="flex-shrink-0 mx-auto sm:mx-0">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-xl flex items-center justify-center">
+                <svg className="w-7 h-7 sm:w-8 sm:h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <h4 className="text-lg font-semibold text-gray-900 truncate">
+            <div className="flex-1 min-w-0 text-center sm:text-left">
+              <h4 className="text-base sm:text-lg font-semibold text-gray-900 truncate px-2 sm:px-0">
                 {selectedFile.name}
               </h4>
               <div className="mt-1 space-y-1">
-                <p className="text-sm text-gray-600">
+                <p className="text-xs sm:text-sm text-gray-600">
                   Size: <span className="font-medium">{formatFileSize(selectedFile.size)}</span>
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-xs sm:text-sm text-gray-600">
                   Type: <span className="font-medium">PDF Document</span>
                 </p>
               </div>
@@ -161,11 +161,11 @@ const FileUpload = ({ onFileUpload, loading, error }) => {
           </div>
           
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <button 
               onClick={handleUpload}
               disabled={loading}
-              className="btn-primary flex items-center justify-center space-x-2 min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="btn-primary flex items-center justify-center space-x-2 w-full sm:min-w-[200px] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {loading ? (
                 <>
@@ -185,7 +185,7 @@ const FileUpload = ({ onFileUpload, loading, error }) => {
             <button 
               onClick={handleReset}
               disabled={loading}
-              className="btn-secondary flex items-center justify-center space-x-2 min-w-[180px] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-secondary flex items-center justify-center space-x-2 w-full sm:min-w-[180px] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />

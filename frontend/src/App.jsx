@@ -56,19 +56,19 @@ function App() {
       {/* Header */}
       <header className="relative overflow-hidden bg-white shadow-sm border-b border-gray-200">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-indigo-600/5"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
-              PDF Research
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 ml-3">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 text-center">
+          <div className="space-y-3 sm:space-y-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+              <span className="block sm:inline">PDF Research</span>
+              <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 sm:ml-3">
                 Summarizer
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
               Upload a research paper PDF to generate an AI-powered academic summary using 
               <span className="font-semibold text-blue-600"> AI</span>
             </p>
-            <div className="flex items-center justify-center space-x-6 text-sm text-gray-500 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-500 pt-2">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>Academic Structure Detection</span>
@@ -99,17 +99,17 @@ function App() {
         )}
 
         {loading && (
-          <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
+          <div className="flex flex-col items-center justify-center py-12 sm:py-20 animate-fade-in px-4">
             <div className="relative">
               <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
               <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-r-indigo-600 rounded-full animate-spin animation-delay-150"></div>
             </div>
-            <div className="mt-8 text-center space-y-3">
-              <h3 className="text-2xl font-semibold text-gray-900">Processing your PDF...</h3>
-              <p className="text-gray-600 max-w-md">
+            <div className="mt-8 text-center space-y-3 max-w-md">
+              <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">Processing your PDF...</h3>
+              <p className="text-sm sm:text-base text-gray-600 px-4">
                 This may take a few minutes while we extract text, detect sections, and generate your summary.
               </p>
-              <div className="flex items-center justify-center space-x-4 text-sm text-gray-500 pt-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500 pt-4">
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
                   <span>Extracting text</span>
@@ -162,16 +162,18 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center space-y-4">
-            <p className="text-gray-600">
+      <footer className="bg-white border-t border-gray-200 mt-12 sm:mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          <div className="text-center space-y-3 sm:space-y-4">
+            <p className="text-sm sm:text-base text-gray-600 px-4">
               Powered by 
-              <span className="font-semibold text-blue-600 mx-1">Research Summary AI</span>
-              • Specialized for 
-              <span className="font-semibold text-cyan-600 mx-1">Research Articles</span>
+              <span className="font-semibold text-blue-600 mx-1">Google Gemini AI</span>
+              • Built with 
+              <span className="font-semibold text-cyan-600 mx-1">React</span>
+              & 
+              <span className="font-semibold text-green-600 mx-1">FastAPI</span>
             </p>
-            <div className="flex items-center justify-center space-x-6 text-sm text-gray-500">
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
               <a href="#" className="hover:text-gray-700 transition-colors">Documentation</a>
               <a href="#" className="hover:text-gray-700 transition-colors">API Reference</a>
               <a href="#" className="hover:text-gray-700 transition-colors">GitHub</a>

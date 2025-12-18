@@ -2,6 +2,9 @@
 
 A production-ready web application that accepts PDF research papers and generates comprehensive academic-style summaries using Google Gemini AI.
 
+## 🚀 Live Demo
+- **Frontend**: [https://researchsummaryai.vercel.app](https://researchsummaryai.vercel.app/)
+
 ## Features
 
 - **PDF Text Extraction**: Extracts text from uploaded PDF research papers using PyMuPDF with pdfplumber fallback
@@ -88,10 +91,16 @@ A production-ready web application that accepts PDF research papers and generate
    ```
 
 ### Access the Application
+Local Development:
 
 - **Frontend**: http://127.0.0.1:5173
 - **Backend API**: http://127.0.0.1:8000
 - **API Documentation**: http://127.0.0.1:8000/docs
+
+Production:
+- **Frontend**: https://researchsummaryai.vercel.app/
+- **Backend API**: https://research-paper-summarizer-w7zv.onrender.com
+- **API Documentation**: https://research-paper-summarizer-w7zv.onrender.com/docs
 
 ## Usage
 
@@ -195,7 +204,7 @@ This project is licensed under the MIT License.
 ## Support
 
 For issues and questions:
-1. Check the API health endpoint: http://127.0.0.1:8000/api/health
+1. Check the API health endpoint: https://research-paper-summarizer-w7zv.onrender.com/api/health
 2. Review the console logs for error details
 3. Ensure your Gemini API key is valid and has quota
 4. Verify all dependencies are installed correctly
